@@ -4,6 +4,15 @@ package com.resuadam2.tutorialcompose
  * Created by resuadam2 on 31/01/2022.
  * Tutorial de Compose en Android
  * Basado en la lista de tutoriales de Mouredev y en la documentación oficial de Android sobre Compose
+ * Main topics:
+ * - Column
+ * - Row
+ * - Image
+ * - setContent
+ * - @Composable
+ * - @Preview
+ * - painterResource
+ * - enableEdgeToEdge
  */
 
 import android.os.Bundle

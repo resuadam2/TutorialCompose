@@ -14,13 +14,15 @@ import androidx.compose.ui.platform.LocalContext
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80,
     secondary = PurpleGrey80,
-    tertiary = Pink80
+    tertiary = Pink80,
+    onBackground = White // Definimos el color del texto sobre un fondo en el tema oscuro a blanco (aunque este ya es el comportamiento por defecto
 )
 
 private val LightColorScheme = lightColorScheme(
     primary = Purple40,
     secondary = PurpleGrey40,
-    tertiary = Pink40
+    tertiary = Pink40,
+    onBackground = Black // Lo mismo para el tema claro, el color del texto sobre un fondo es negro
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
