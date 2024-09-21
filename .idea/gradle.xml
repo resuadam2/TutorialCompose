@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/introcompose" />
             <option value="$PROJECT_DIR$/listas" />
             <option value="$PROJECT_DIR$/modificadores" />
+            <option value="$PROJECT_DIR$/state" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />
