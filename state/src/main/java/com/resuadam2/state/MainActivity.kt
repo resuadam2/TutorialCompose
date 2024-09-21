@@ -6,7 +6,7 @@ package com.resuadam2.state
  * Basado en la lista de tutoriales de Mouredev y en la documentación oficial de Android sobre Compose
  * Main topics:
  * - Estado (State)
- *
+ * //TODO: Añadir más temas y completar el ejemplo
  */
 
 
@@ -25,7 +25,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
