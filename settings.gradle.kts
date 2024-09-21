@@ -20,5 +20,6 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "TutorialCompose"
-include(":introduccion")
 include(":modificadores")
+include(":listas")
+include(":introcompose")

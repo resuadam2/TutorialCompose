@@ -1,7 +1,7 @@
 package com.resuadam2.modificadores
 
 /**
- * Created by resuadam2 on 31/01/2022.
+ * Created by resuadam2 on september 2024.
  * Tutorial de Compose en Android
  * Basado en la lista de tutoriales de Mouredev y en la documentación oficial de Android sobre Compose
  * Main topics:
@@ -45,7 +45,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.resuadam2.modificadores.ui.theme.TutorialComposeTheme
 
-// Partiremos del ejercicio anterior, disponible en el módulo app de este mismo proyecto
+// Partiremos del ejercicio anterior, disponible en el módulo introcompose de este mismo proyecto
 
 class MainActivity : ComponentActivity() {
     // En el método onCreate, llamamos a la función enableEdgeToEdge para habilitar el modo de pantalla completa
