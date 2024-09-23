@@ -6,7 +6,8 @@ package com.resuadam2.state
  * Basado en la lista de tutoriales de Mouredev y en la documentación oficial de Android sobre Compose
  * Main topics:
  * - Estado (State)
- * //TODO: Añadir más temas y completar el ejemplo
+ * - remember
+ * - mutableStateOf
  */
 
 
@@ -17,6 +18,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -29,6 +31,10 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -42,21 +48,21 @@ import com.resuadam2.state.ui.theme.TutorialComposeTheme
 
 //Crearemos una constante privada para almacenar una lista de nombres y poder probar la lista de elementos
 private val names = listOf(
-    FullName("Iago", "Aspas"),
-    FullName("Vicente", "Guaita"),
-    FullName("Tasos", "Douvikas"),
-    FullName("Hugo","Álvarez"),
-    FullName("Williot","Swedberg"),
-    FullName("Hugo","Sotelo"),
-    FullName("Fran","Beltrán"),
-    FullName("Borja","Iglesias"),
-    FullName("Pablo","Durán"),
-    FullName("Carlos","Domínguez"),
-    FullName("Óscar","Mingueza"),
-    FullName("Alexander","Mostovoi"),
-    FullName("Vlado","Gudelj"),
-    FullName("Valery","Karpin"),
-    FullName("Jose Manuel", "Pinto"),
+    FullName("Iago", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas leo elit, condimentum ut vulputate sed, blandit ut metus. Mauris erat tellus, rhoncus faucibus rhoncus eu, mollis vel purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit."),
+    FullName("Vicente", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "),
+    FullName("Tasos", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "),
+    FullName("Hugo","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas leo elit, condimentum ut vulputate sed, blandit ut metus. Mauris erat tellus, rhoncus faucibus rhoncus eu, mollis vel purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit."),
+    FullName("Williot","Lorem ipsum dolor sit amet, consectetur adipiscing elit. "),
+    FullName("Hugo","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas leo elit, condimentum ut vulputate sed, blandit ut metus. Mauris erat tellus, rhoncus faucibus rhoncus eu, mollis vel purus. "),
+    FullName("Fran","Lorem ipsum dolor sit amet, consectetur adipiscing elit. "),
+    FullName("Borja","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas leo elit, condimentum ut vulputate sed, blandit ut metus. Mauris erat tellus, rhoncus faucibus rhoncus eu, mollis vel purus. "),
+    FullName("Pablo","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas leo elit, condimentum ut vulputate sed, blandit ut metus. Mauris erat tellus, rhoncus faucibus rhoncus eu, mollis vel purus. "),
+    FullName("Carlos","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas leo elit, condimentum ut vulputate sed, blandit ut metus. Mauris erat tellus, rhoncus faucibus rhoncus eu, mollis vel purus. "),
+    FullName("Óscar","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas leo elit, condimentum ut vulputate sed, blandit ut metus. Mauris erat tellus, rhoncus faucibus rhoncus eu, mollis vel purus. "),
+    FullName("Alexander","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas leo elit, condimentum ut vulputate sed, blandit ut metus. Mauris erat tellus, rhoncus faucibus rhoncus eu, mollis vel purus. "),
+    FullName("Vlado","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas leo elit, condimentum ut vulputate sed, blandit ut metus. Mauris erat tellus, rhoncus faucibus rhoncus eu, mollis vel purus. "),
+    FullName("Valery","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas leo elit, condimentum ut vulputate sed, blandit ut metus. Mauris erat tellus, rhoncus faucibus rhoncus eu, mollis vel purus. "),
+    FullName("Jose Manuel", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas leo elit, condimentum ut vulputate sed, blandit ut metus. Mauris erat tellus, rhoncus faucibus rhoncus eu, mollis vel purus. "),
 )
 
 class MainActivity : ComponentActivity() {
@@ -71,27 +77,39 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+// Añadimos a nuestro CustomText un parámetro lines para indicar el número de líneas que queremos mostrar
 @Composable
-fun CustomText(text: String, color: Color, style: TextStyle = TextStyle.Default) {
+fun CustomText(text: String, color: Color, style: TextStyle = TextStyle.Default, lines: Int = Int.MAX_VALUE) {
     Text(
         text = text,
         color = color,
-        style = style
+        style = style,
+        maxLines = lines
     )
 }
 
+data class FullName(val name: String, val text: String)
+
 /**
- * Data class para almacenar el nombre y el apellido de una persona
- * @param name nombre de la persona
- * @param surname apellido de la persona
- * Así podemos pasar un objeto de tipo FullName a la función Greeting
+ * Jetpack Compose funciona de manera estática, mediante programación reactiva y funcional.
+ * Esto significa que los elementos componibles no cambian su estado una vez creados.
+ * Debemos tener definido la totalidad del contexta de la UI antes de ejecutar la aplicación.
+ * Por tanto, no podemos utilizar variales que muten en tiempo de ejecución.
+ * Para almacenar estados en funciones componibles necesitaremos utilizar remember.
+ * Esto nos permitirá almacenar valores en una variable dentro del contexto de la función componible.
  */
-data class FullName(val name: String, val surname: String)
 
 @Composable
 fun Greeting(fullName: FullName) {
+
+    // var expanded = false // no nos sirve dentro del contexto de compose
+    var expanded by remember { mutableStateOf(false) } // Variable para controlar si el texto está expandido o no
+
     Column(
-        modifier = Modifier.padding(8.dp)
+        // Añadimos al modificador de la columna la propiedad clickable para hacer que el elemento sea clickeable
+        modifier = Modifier.padding(8.dp).clickable {
+            expanded = !expanded // Cambiamos el valor de la variable al hacer click
+        }
     ) {
 
         CustomText(
@@ -99,7 +117,11 @@ fun Greeting(fullName: FullName) {
             color = MaterialTheme.colorScheme.primary,
             style = MaterialTheme.typography.titleLarge)
         Spacer(modifier = Modifier.height(8.dp)) // Spacer para añadir un espacio entre los elementos
-        CustomText(text = "Goodbye ${fullName.surname}!", color = MaterialTheme.colorScheme.onBackground)
+        CustomText(
+            text = "Goodbye ${fullName.text}!",
+            color = MaterialTheme.colorScheme.onBackground,
+            lines = if (expanded) Int.MAX_VALUE else 2 // Si expanded es true, mostramos todas las líneas, si no, mostramos solo 2
+            )
     }
 }
 
