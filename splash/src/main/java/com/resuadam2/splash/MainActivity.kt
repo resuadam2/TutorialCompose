@@ -6,6 +6,11 @@ package com.resuadam2.splash
  *  * Basado en la lista de tutoriales de Mouredev y en la documentación oficial de Android sobre Compose
  *  * Main topics:
  *  - Splash Screen
+ *  - Navigation
+ *  - Launched Effect
+ *  - Composable functions
+ *  - Coroutines
+ *  - Delay
  */
 
 import android.os.Bundle
